@@ -1,1 +1,1 @@
-export {TypingTitle} from './ui/TypingTitle'
+export {TypingTitle} from './ui/TypingTitle';

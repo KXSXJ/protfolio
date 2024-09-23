@@ -1,19 +1,14 @@
-import React from 'react';
-import styled from "@emotion/styled";
+import React, {useEffect} from 'react';
 import {AboutMe} from "../../../features/aboutMe";
-
-const Content_Container = styled.main`
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: relative;
-    z-index: 1;
-`
+import {gsap} from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 export const Contents:React.FC =()=>{
+
+
     return(
-        <Content_Container>
+        <main>
             <AboutMe/>
-        </Content_Container>
+        </main>
     )
 }

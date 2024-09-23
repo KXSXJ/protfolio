@@ -2,41 +2,17 @@ import {useState, useEffect, useRef} from 'react';
 import styled from "@emotion/styled";
 import React from "react";
 import {theme} from "../../../shared/styles/theme";
-
-const Blink_Text = styled.h1`
-    font-weight: 550;
-    display: flex;
-    position: relative;
-    z-index: 2;
-    color: ${theme.color.white};
-    margin-left: 2px;
-    margin-top: -4px;
-    font-size: 2.5vw;
-    
-    
-    animation: blink-caret 1s step-end infinite;
-    @keyframes blink-caret {
-        from, to { color: transparent; }
-        50% { color:  ${theme.color.white} }
-    }
-`
-const Write_Text = styled.h1`
-    color: ${theme.color.white};
-    font-size: 2.5vw;
-    font-weight: 550;
-    display: flex;
-    position: relative;
-    z-index: 1;
-`
-
-
+import { gsap } from "gsap";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export const TypingTitle:React.FC = () => {
     const intervalRef = useRef<NodeJS.Timeout>()
     const [title, setTitle] = useState('');
     const [count, setCount] = useState(0);
     const completionWord = '주니어 개발자 강승재의 포트폴리오 입니다.';
-    
+    const textRef = useRef<HTMLDivElement|null>(null);
+    const startTriggerRef = useRef<HTMLDivElement|null>(null);
+
 
     useEffect(() => {
         intervalRef.current = setInterval(() => {
@@ -59,12 +35,60 @@ export const TypingTitle:React.FC = () => {
         }
     }, [count]);
 
-    
+    gsap.registerPlugin(ScrollTrigger);
+    useEffect(() => {
+        const config = {
+            scrollTrigger: {
+                trigger: startTriggerRef.current as HTMLDivElement,
+                start: "top 20%",
+                toggleActions: "play none none none",
+                scrub: 1,
+            },
+            x: 1200,
+            duration: 1,
+            opacity:0,
+        }
+        gsap.to(textRef.current as HTMLDivElement,config)
+
+
+    }, []);
+
 
     return (
-        <>
-            <Write_Text>{title}</Write_Text>
-            <Blink_Text>|</Blink_Text>
-        </>
+        <TextContainer ref={startTriggerRef}>
+            <div className="text" ref={textRef}>
+                <div>{title}</div>
+                <div className="text__blink">|</div>
+            </div>
+        </TextContainer>
     );
 };
+
+const TextContainer = styled.section`
+    display: flex;
+    position: fixed;
+    z-index: 9999;
+    color: ${theme.color.white};
+    font-weight: 700;
+    font-size: 4.5vw;
+    white-space: nowrap;
+    @keyframes blink-caret {
+        from, to { color: transparent; }
+        50% { color:  ${theme.color.white} }
+    }
+    
+
+    .text{
+        display: flex;
+        &__border {
+            -webkit-text-stroke: 0.02em ${theme.color.blue}77;
+        }
+
+        &__blink{
+            margin-top: -0.5vw;
+            animation: blink-caret 1s step-end infinite;
+        }
+    }
+
+    }
+`

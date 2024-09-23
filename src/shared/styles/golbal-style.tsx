@@ -1,9 +1,10 @@
-
 import { createGlobalStyle } from "styled-components";
 import { reset } from "styled-reset";
 import { media } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
     ${reset}
     ::-webkit-scrollbar { 
         display: none !important;
@@ -12,6 +13,10 @@ export const GlobalStyle = createGlobalStyle`
         outline: none;
         border: none;
     }
+    body{
+        font-family: "Open Sans", sans-serif;
+    }
+    
     div[role="button"] {
         cursor: pointer;
     }
@@ -35,6 +40,10 @@ export const GlobalStyle = createGlobalStyle`
         left: 0;
         height: 100vh;
         position: fixed;
+    }
+    .pageView{
+        width: 100%;
+        height: 100vh;
     }
 
     .pc-only{
