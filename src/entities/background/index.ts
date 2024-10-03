@@ -1,1 +1,0 @@
-export {BackGround} from './ui/BackGround'
