@@ -4,7 +4,6 @@ import reportWebVitals from './reportWebVitals';
 import {GlobalStyle} from "./shared/styles/golbal-style";
 import {theme} from "./shared/styles/theme";
 import {ThemeProvider} from "styled-components";
-import {Pages} from "./pages";
 import {PortFolio} from "./app";
 
 const root = ReactDOM.createRoot(
