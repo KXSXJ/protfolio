@@ -44,10 +44,6 @@ export const GlobalStyle = createGlobalStyle`
         position: fixed;
         z-index: 0;
     }
-    .pageView{
-        width: 100%;
-        height: 100vh;
-    }
 
     .pc-only{
         ${media.mobile}{

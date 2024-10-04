@@ -5,8 +5,8 @@ declare module "styled-components" {
         color: {
             black: "#171717";
             gray: "#4f4f4f";
-            blue: "#001AFF";
-            white: "#EEEEEE";
+            blue: "#4e59bd";
+            white: "#ffffff";
             gradient: "linear-gradient(128.93deg, #00ADB5 22.41%, #393E46 93.45%)";
 
             green: "#346751";
