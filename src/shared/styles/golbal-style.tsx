@@ -3,8 +3,7 @@ import { reset } from "styled-reset";
 import { media } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
     ${reset}
 
     :focus {
@@ -17,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
     }
     html{
-        font-family: "Open Sans", sans-serif;
+        font-family: "Roboto", sans-serif;
         color: ${({ theme }) => theme.color.white};
         scroll-behavior: smooth;
         ${media.laptop} {
@@ -44,6 +43,18 @@ export const GlobalStyle = createGlobalStyle`
         position: fixed;
         z-index: 0;
     }
+    .grid{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 3rem;
+        justify-content: start;
+        ${media.tablet} {
+            grid-template-columns: 1fr;
+        }
+        ${media.mobile} {
+            grid-template-columns: 1fr;
+        }
+    }
 
     .pc-only{
         ${media.mobile}{
@@ -59,7 +70,7 @@ export const GlobalStyle = createGlobalStyle`
     h1{
         font-size: 4rem;
         min-font-size: 100px;
-        font-weight: 600;
+        font-weight: 750;
 
     }
     h2{

@@ -81,9 +81,6 @@ const AboutMe_Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    h1{
-        font-weight: 750;
-    }
     p{
         margin-top: 1rem;
         color: ${theme.color.black}77;
@@ -124,7 +121,7 @@ const Info_Box = styled.div`
     flex-direction: row;
     box-sizing: border-box;
     border-radius: 5px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
     align-items: center;
     h4{
         font-size: 1.2rem;
@@ -159,8 +156,8 @@ const Icon_Wrapper = styled.div`
 
 const Grid_Box = styled.div`
     display: grid;
-    justify-content: center; /* 가운데 정렬 */
-    grid-template-columns: repeat(2, 1fr); /* 기본 2줄 */
+    justify-content: center; 
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 1rem;
 
     div {
