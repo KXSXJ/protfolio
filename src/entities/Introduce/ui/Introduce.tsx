@@ -11,7 +11,10 @@ export const Introduce :React.FC = ()=>{
     const sectionRef = useRef<HTMLTableSectionElement|null>(null)
     const textRef2 = useRef<HTMLHeadingElement|null>(null)
     const subTextRef2 = useRef<HTMLParagraphElement|null>(null)
+    const contentRef = useRef<HTMLDivElement|null>(null)
     const moreViewRef = useRef<HTMLDivElement|null>(null)
+    const gideTextRef = useRef<HTMLDivElement|null>(null)
+
     gsap.registerPlugin(ScrollTrigger);
     useEffect(() => {
         const config = {
@@ -27,7 +30,7 @@ export const Introduce :React.FC = ()=>{
 
         };
 
-            gsap.timeline()
+        gsap.timeline()
            .to(textRef.current,
             config)
             .to(subTextRef.current, {
@@ -69,40 +72,75 @@ export const Introduce :React.FC = ()=>{
             y: '-10rem'
         }
 
-            gsap.fromTo(textRef2.current,
-                {y:0},
-                {...config2,
-                }
-            )
-            gsap.fromTo(subTextRef2.current,
-                {y:0},
-                {...config2,
-                    scrollTrigger:{
+        gsap.fromTo(textRef2.current,
+            {y:0},
+            {...config2,
+            }
+        )
+        gsap.fromTo(subTextRef2.current,
+            {y:0},
+            {...config2,
+                scrollTrigger:{
+                ...config2.scrollTrigger,
+                    start: 'center 65%',
+                    end : 'center 30%',
+                },
+            })
+        gsap.fromTo(moreViewRef.current,
+            {y:0},
+            {...config2,
+                scrollTrigger:{
                     ...config2.scrollTrigger,
-                        start: 'center 65%',
-                        end : 'center 30%',
-                    },
-                })
-            gsap.fromTo(moreViewRef.current,
-                {y:0},
-                {...config2,
-                    scrollTrigger:{
-                        ...config2.scrollTrigger,
-                        start: 'center 20%',
-                        end : 'center 0%',
-                    },
-                    y:0
-                })
+                    start: 'center 20%',
+                    end : 'center 0%',
+                },
+                y:0,
+                duration:2,
+            })
+
+        gsap.to(moreViewRef.current,
+            {scrollTrigger:{
+                    trigger:sectionRef.current as HTMLTableSectionElement,
+                    start : 'bottom 68%',
+                    end : 'bottom 60%',
+                    toggleActions: "play none none none",
+                    scrub: true,
+                },
+                y:'-4rem'
+            }
+        )
+        gsap.to(contentRef.current,
+            {scrollTrigger:{
+                    trigger:sectionRef.current as HTMLTableSectionElement,
+                    start : 'bottom 60%',
+                    end : 'bottom -40%',
+                    toggleActions: "play none none none",
+                    scrub: true,
+                },
+                y:`-65vh`
+            }
+        )
+        gsap.to(gideTextRef.current,
+            {scrollTrigger:{
+                    trigger:sectionRef.current as HTMLTableSectionElement,
+                    start : 'bottom 70%',
+                    end : 'bottom 40%',
+                    toggleActions: "play none none none",
+                    scrub: true,
+                },
+                opacity:0
+            })
+
 
 
     }, []);
     return(
         <Introduce_container>
             <section ref={sectionRef}>
-                <Gide_Text>
+                <Gide_Text ref={gideTextRef}>
                     ↓ 스크롤하여 진행해주세요!
                 </Gide_Text>
-                <Introduce_TextWrapper>
+                <Introduce_TextWrapper ref={contentRef}>
                     <h1 ref={textRef}>안녕하세요!</h1>
                     <p ref={subTextRef}>FE개발자 강승재입니다.</p>
                     <h1 ref={textRef2} style={{opacity: 0}}>FE개발자 강승재</h1>
@@ -114,6 +152,7 @@ export const Introduce :React.FC = ()=>{
                         더 알아보기 ↓
                     </div>
                 </Introduce_TextWrapper>
+
 
             </section>
 
@@ -133,6 +172,8 @@ const Introduce_container = styled.div`
         height: 350vh;
       
     }
+    position: relative;
+    z-index: -1;
 `
 
 const Introduce_TextWrapper = styled.div`
@@ -144,6 +185,7 @@ const Introduce_TextWrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: -5rem;
+    z-index: -1;
     h1{
         font-size: 5rem;
     }
@@ -179,7 +221,7 @@ const floating = keyframes`
   }
 `;
 
-const Gide_Text = styled.p`
+const Gide_Text = styled.h3`
     display: flex;
     position: fixed;
     font-size:1rem;
