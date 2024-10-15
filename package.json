@@ -1,4 +1,5 @@
 {
+  "homepage": " https://kxsxj.github.io/portfolio",
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
@@ -23,6 +24,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -49,6 +52,7 @@
   "devDependencies": {
     "@types/gsap": "^3.0.0",
     "eslint-config-react-app": "^7.0.1",
+    "gh-pages": "^6.2.0",
     "node-sass": "^9.0.0",
     "sass": "^1.79.1",
     "sass-loader": "^16.0.1"
