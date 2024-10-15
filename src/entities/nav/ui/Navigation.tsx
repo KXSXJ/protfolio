@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styled from "@emotion/styled";
 import {theme} from "../../../shared/styles/theme";
 
 export const Navigation :React.FC=()=>{
     const [screenMode, setScreenMode] = useState<string>("pc");
     const [showNavList, setShowNavList] = useState<boolean>(false)
+    const navRef = useRef<HTMLElement>(null)
+
     useEffect(() => {
         const handleResize = ()=>{
             let state = window.innerWidth > 880 ? "pc" : window.innerWidth > 420 ? "tablet" : "mobile"
@@ -18,6 +20,49 @@ export const Navigation :React.FC=()=>{
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            // Navigation_Container 내부에서 클릭된 경우 무시
+            if (navRef.current && !navRef.current?.contains(event.target as Node)) {
+                setShowNavList(false); // 바깥 클릭 시 상태 변경 (닫기)
+            }
+        };
+        // 이벤트 리스너 추가
+        window.addEventListener("click", handleClickOutside);
+
+        return () => {
+            // 이벤트 리스너 제거
+            window.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleScroll = (e: Event) => {
+            e.preventDefault();
+            const target = document.querySelector((e.target as HTMLAnchorElement).getAttribute('href') || '');
+            if (target) {
+                const screenHeight = window.innerHeight;
+                // 각 모드별로 다른 offset 적용
+                const offset = target.id === "About" ? screenHeight * 0.5 : target.id === "Project" ? 20 : 50;
+                window.scrollTo({
+                    top: target.getBoundingClientRect().top + window.scrollY - offset,
+                    behavior: "smooth",
+                });
+            }
+        };
+        // 스크롤 이벤트 한 번만 등록
+        const links = document.querySelectorAll('a[href^="#"]');
+        links.forEach((link) => {
+            link.addEventListener("click", handleScroll);
+        });
+
+        return () => {
+            links.forEach((link) => {
+                link.removeEventListener("click", handleScroll);
+            });
+        };
+    }, [screenMode, showNavList]);
+
 
     const navList_Handler = ()=>{
         if(screenMode==="pc") {
@@ -28,7 +73,11 @@ export const Navigation :React.FC=()=>{
     }
 
     return(
-        <Navigation_Container>
+        <Navigation_Container ref={navRef} onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+            if (e.target === navRef.current) {
+                setShowNavList(false);
+            }
+        }}>
             <span>
                 <h3>
                     KSJ's Portfolio
@@ -39,16 +88,24 @@ export const Navigation :React.FC=()=>{
                     {screenMode === "pc" ?
                         <ul>
                             <li>
-                                About Me
+                                <a href={"#About"}>
+                                    About Me
+                                </a>
                             </li>
                             <li>
-                                Skills
+                                <a href={"#Skills"}>
+                                    Skills
+                                </a>
                             </li>
                             <li>
-                                Project
+                                <a href={"#Project"}>
+                                    Project
+                                </a>
                             </li>
                             <li>
-                                Archiving
+                                <a href={"#Archiving"}>
+                                    Archiving
+                                </a>
                             </li>
                         </ul>
                         :
@@ -65,16 +122,24 @@ export const Navigation :React.FC=()=>{
             {(screenMode !== 'pc' && showNavList) &&
                 <ul>
                     <li>
-                        About Me
+                        <a href={"#About"}>
+                            About Me
+                        </a>
                     </li>
                     <li>
-                        Skills
+                        <a href={"#Skills"}>
+                            Skills
+                        </a>
                     </li>
                     <li>
-                        Project
+                        <a href={"#Project"}>
+                            Project
+                        </a>
                     </li>
                     <li>
-                        Archiving
+                        <a href={"#Archiving"}>
+                            Archiving
+                        </a>
                     </li>
                 </ul>
             }
@@ -85,8 +150,8 @@ export const Navigation :React.FC=()=>{
 }
 
 interface screenState {
-    $showNavList:boolean,
-    $screenMode:string,
+    $showNavList: boolean,
+    $screenMode: string,
 }
 
 
@@ -96,15 +161,21 @@ const Nav_wrapper = styled.div<screenState>`
         color: ${theme.color.white};
         display: flex;
         flex-direction: row;
+
         li {
             padding-inline: 2rem;
             align-items: center;
-            white-space: nowrap; 
+            white-space: nowrap;
+
             &:hover {
-                color: ${theme.color.white}77;
+                a {
+                    color: ${theme.color.white}77;
+                }
+
                 background-color: transparent;
 
             }
+
             transition: color ease 0.3s;
             cursor: pointer;
         }
@@ -112,6 +183,7 @@ const Nav_wrapper = styled.div<screenState>`
 
     .iconWrapper {
         padding: 6px;
+
         &__iconLine {
             width: 1.2rem;
             height: 1px;
@@ -158,10 +230,11 @@ const Navigation_Container= styled.nav`
     flex-direction: column;
     align-items: center;
     background-color: ${theme.color.black};
+    opacity: 0.95;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 9997;
     span{    
         width: 100%;
         display: flex;
@@ -180,8 +253,7 @@ const Navigation_Container= styled.nav`
             padding-block: 0.8rem;
             margin-block: 0.1rem;
             align-items: center;
-
-
+            
             &:hover {
                 background-color: ${theme.color.gray}40;
             }

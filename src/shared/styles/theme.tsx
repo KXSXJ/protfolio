@@ -3,7 +3,7 @@ import { DefaultTheme } from "styled-components";
 export const theme: DefaultTheme = {
     color: {
         black: "#171717",
-        gray: "#4f4f4f",
+        gray: "#676767",
         blue: "#4e59bd",
         white: "#ffffff",
         gradient: "linear-gradient(128.93deg, #00ADB5 22.41%, #393E46 93.45%)",

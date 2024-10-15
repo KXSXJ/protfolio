@@ -11,3 +11,9 @@ export interface SkillState{
     lineNum:number,
     list : Skill_List[]
 }
+
+export interface ExperienceState{
+    title:string,
+    _skills:Skill_Detail[],
+    content:string[],
+}

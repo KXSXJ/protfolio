@@ -1,33 +1,14 @@
 import styled from "@emotion/styled";
 import {media, theme} from "../../../shared/styles/theme";
-import {useEffect, useRef} from "react";
+import {forwardRef, useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 
-export const AboutMe :React.FC = ()=>{
-    // const sectionRef = useRef<HTMLTableSectionElement|null>(null)
-    // gsap.registerPlugin(ScrollTrigger);
-    // useEffect(() => {
-    //     const config = {
-    //         scrollTrigger: {
-    //             trigger: sectionRef.current as HTMLTableSectionElement,
-    //             start: 'bottom 40%',
-    //             end: 'bottom 10%',
-    //             toggleActions: "play none none none",
-    //             scrub: true,
-    //             markers:true
-    //         },
-    //         backgroundColor:theme.color.black,
-    //         duration: 1// 애니메이션 지속 시간
-    //     };
-    //     gsap.to(sectionRef.current,
-    //         config)
-    // },[])
+export const AboutMe :React.FC =(props, ref)=>{
+
     return(
-        <AboutMe_Container >
-            <h1>ABOUT ME</h1>
-            <br/>
-            <br/>
+        <AboutMe_Container>
+            <h1 id={"About"}>ABOUT ME</h1>
             <Grid_Box>
                 <Info_Box>
                     <Icon_Wrapper>
@@ -58,7 +39,7 @@ export const AboutMe :React.FC = ()=>{
                     </div>
                 </Info_Box>
                 <Info_Box>
-                    <Icon_Wrapper>
+                <Icon_Wrapper>
                         <i className="bi bi-telephone"></i>
                     </Icon_Wrapper>
                     <div style={{marginLeft: '1rem'}}>
@@ -74,13 +55,14 @@ export const AboutMe :React.FC = ()=>{
     )
 }
 
-const AboutMe_Container = styled.div`
+const AboutMe_Container = styled.section`
     width: 100%;
     padding-block: 4rem;
     color: ${theme.color.black};
     display: flex;
     flex-direction: column;
     align-items: center;
+    
     p{
         margin-top: 1rem;
         color: ${theme.color.black}77;
@@ -138,8 +120,11 @@ const Info_Box = styled.div`
         margin-top: 0.1rem;
         font-weight: 550;
     }
-    //
-    //cursor: pointer;
+    z-index: 2;
+cursor: pointer;
+    &:hover{
+        transform: scale(1.05);
+    }
 `
 const Icon_Wrapper = styled.div`
     width: 3rem;
@@ -149,6 +134,8 @@ const Icon_Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    z-index: 2;
     i{
         color: ${theme.color.white};
     }
@@ -159,7 +146,8 @@ const Grid_Box = styled.div`
     justify-content: center; 
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1rem;
-
+    margin-top: 2rem;
+    
     div {
         margin: 0.1rem;
     }

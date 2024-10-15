@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { reset } from "styled-reset";
-import { media } from "./theme";
+import {media, theme} from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz@0,14..32;1,14..32&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
@@ -19,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "Roboto", sans-serif;
         color: ${({ theme }) => theme.color.white};
         scroll-behavior: smooth;
+        
         ${media.laptop} {
             font-size: 14px; 
         }
@@ -28,7 +29,15 @@ export const GlobalStyle = createGlobalStyle`
         }
 
         ${media.mobile} {
-            font-size: 8px; 
+            font-size: 8px;
+            overflow: scroll;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE 10+ */
+
+
+            body::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Edge, Opera */
+            }
         }
     }
     .flex{
@@ -46,8 +55,9 @@ export const GlobalStyle = createGlobalStyle`
     .grid{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 3rem;
+        grid-gap: 2rem;
         justify-content: start;
+        margin-top: 3rem;
         ${media.tablet} {
             grid-template-columns: 1fr;
         }
@@ -92,6 +102,8 @@ export const GlobalStyle = createGlobalStyle`
         padding-block: 0.1rem;
         cursor: pointer;
         margin-left: 0.2rem;
+        text-decoration: none;
+        color: ${theme.color.white};
     }
     i{
         font-size: 1.6rem;

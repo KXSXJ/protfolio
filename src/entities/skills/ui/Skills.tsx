@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
 import {media, theme} from "../../../shared/styles/theme";
 import {useEffect, useRef, useState} from "react";
-import {Knowledgeable, Strength} from "./SkillsData";
+import {StrengthData} from "../model/StrengthData";
 import {Skill_Item} from "./Skill_Item";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {Experience} from "./Experience";
+import {KnowledgeData} from "../model/KnowledgeData";
 
 export const Skills:React.FC= ()=>{
     const sectionRef = useRef<HTMLTableSectionElement|null>(null)
-    const strengthRef = useRef<(HTMLLIElement | null)[][]>(Array.from({length:Strength.length},()=>[]))
+    const strengthRef = useRef<(HTMLLIElement | null)[][]>(Array.from({length:StrengthData.length},()=>[]))
     const knowledgeableRef = useRef<(HTMLLIElement | null)[]>([])
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -73,24 +74,24 @@ export const Skills:React.FC= ()=>{
     }, []);
 
     return(
-        <Skills_Container ref={sectionRef}>
+        <Skills_Container ref={sectionRef} id="Skills">
             <Skill_Wrapper>
                 <h2 style={{color:theme.color.red}}>STRENGTH</h2>
                 <Grid_Container>
-                    {Strength.map(({title, lineNum, list},rIdx)=>(
+                    {StrengthData.map(({title, lineNum, list},rIdx)=>(
                         <Grid_Wrapper $lineNum={lineNum} key={title}>
                             <h3> {title}</h3>
                             <ul>
 
                                 {list.map(({_skills},cIdx)=> (
-                                    <>
+                                    <span key={cIdx}>
                                         {lineNum===cIdx+1 &&<li></li>}
                                         <li ref={(el)=> {
                                             strengthRef.current[rIdx][cIdx] = el
                                         }}>
                                             <Skill_Item _skills={_skills}/>
                                         </li>
-                                    </>
+                                    </span>
                                 ))}
                             </ul>
                         </Grid_Wrapper>
@@ -98,16 +99,16 @@ export const Skills:React.FC= ()=>{
                 </Grid_Container>
             </Skill_Wrapper>
             <Skill_Wrapper>
-                <h2 style={{marginBlock:'1rem', color:theme.color.lightBlue}}>{Knowledgeable.title}</h2>
-                <Grid_Wrapper $lineNum={Knowledgeable.lineNum}>
+                <h2 style={{marginBlock:'1rem', color:theme.color.lightBlue}}>{KnowledgeData.title}</h2>
+                <Grid_Wrapper $lineNum={KnowledgeData.lineNum}>
                     <ul>
-                        {Knowledgeable.list.map(({_skills},idx)=>
-                            <>
-                                {Knowledgeable.lineNum === idx + 1 && <li></li>}
+                        {KnowledgeData.list.map(({_skills},idx)=>
+                            <span key={idx}>
+                                {KnowledgeData.lineNum === idx + 1 && <li></li>}
                                 <li ref={(el)=>{knowledgeableRef.current[idx] =el}}>
                                     <Skill_Item _skills={_skills}/>
                                 </li>
-                            </>
+                            </span>
                         )}
                     </ul>
                 </Grid_Wrapper>
