@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import {media, theme} from "../../../shared/styles/theme";
-import {ExperienceData} from "./SkillsData";
+import { theme} from "../../../shared/styles/theme";
+import {ExperienceData} from "../model/ExperienceData";
 import {Skill_Item} from "./Skill_Item";
 import {useEffect, useRef} from "react";
 import {gsap} from "gsap";
@@ -52,7 +52,7 @@ export const Experience :React.FC =()=>{
                         </div>
                         <ul>
                             {content.map((text)=>(
-                                <li>
+                                <li key={text}>
                                     {text}
                                 </li>
                             ))}

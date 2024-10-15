@@ -1,17 +1,66 @@
 import styled from "@emotion/styled";
 import {media, theme} from "../../../shared/styles/theme";
-import {ProjectData} from "./ProjectData";
+import {Images, ProjectData} from "./ProjectData";
 import {text} from "node:stream/consumers";
+import {useEffect, useRef, useState} from "react";
+import {gsap} from "gsap";
+import {ImageModal} from "./ImageModal";
 
 export const Project :React.FC =()=>{
-    return(
-        <Project_Container>
-            <h1>PROJECT</h1>
-            <div className="grid" style={{borderRadius:'20px', marginTop:'3rem'}}>
+    const articleRef = useRef<(HTMLElement | null)[]>([]);
+    const [imageView,setImageView] = useState<Images[]>([])
+    const [title, setTitle] = useState<string>('')
+    const animationRef = useRef<gsap.core.Timeline[]>([])
 
-                {ProjectData.map((data)=>(
-                    <article key={data.title}>
-                        <Cover_Img $url={`./images/${data.cover}`}/>
+    useEffect(() => {
+        const timeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: articleRef.current[0],
+                start: "top 80%",
+                end: "top 30%",
+                toggleActions: "play none none none",
+                scrub: 2,
+            },
+            duration: 0.4,
+            ease: "power2.inOut",
+        });
+
+        articleRef.current.forEach((el) => {
+            if (el && !imageView.length) {
+                animationRef.current.push(
+                    timeline.fromTo(
+                        el,
+                        {
+                            y:30,
+                            opacity: 0,
+                        },
+                        {
+                            y:0,
+                            opacity: 1,
+                        }
+                    )
+                )
+            }else{
+                animationRef.current.forEach(timeline=>
+                timeline.kill())
+            }
+        });
+    }, [imageView]);
+
+    return(
+        <Project_Container id="Project">
+            {imageView.length>0 &&
+                <ImageModal title={title}
+                            images={imageView}
+                            onClose={()=>setImageView([])}/>
+            }
+            <h1>PROJECT</h1>
+            <div className="grid">
+                {ProjectData.map((data,idx)=>(
+
+                    <article key={data.title} ref={(el)=> {
+                        articleRef.current[idx] =el
+                    }}><Cover_Img $url={`./images/${data.cover}`}/>
                         <section>
                             <h5>{data.title}</h5>
                             <h6>개발기간 : {data.dev_time}</h6>
@@ -33,14 +82,19 @@ export const Project :React.FC =()=>{
                             </a>
                             <p>{data.use_stack}</p>
                             <div style={{marginTop:'1rem'}}>
-                                <button style={{marginRight: '0.5rem'}}>
+                                <button style={{marginRight: '0.5rem'}} onClick={()=>window.open(data.readme_url)}>
                                     <img src={'./images/readme.png'}></img>
                                     <>README</>
                                 </button>
-                                <button>
-                                    <img src={'./images/gallery.png'}></img>
-                                    <>이미지</>
-                                </button>
+                                {data.images.length>0 &&
+                                    <button onClick={()=> {
+                                        setImageView(data.images)
+                                        setTitle(data.title)
+                                    }}>
+                                        <img src={'./images/gallery.png'}></img>
+                                        <>이미지</>
+                                    </button>
+                                }
                             </div>
                         </section>
                     </article>
@@ -57,7 +111,6 @@ const Project_Container = styled.section`
     align-items: center;
     box-sizing: border-box;
     color: ${theme.color.black};
-
     div {
         article {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -146,6 +199,7 @@ const Project_Container = styled.section`
                     border-radius: 5px;
                     border: 2px solid ${theme.color.black}20;
                     font-weight: 550;
+                    cursor: pointer;
                     &:hover{
                         color: ${theme.color.blue}; 
                     }

@@ -1,4 +1,4 @@
-import {Skill_List} from "./types";
+import {Skill_List} from "../model/types";
 import styled from "@emotion/styled";
 import {theme} from "../../../shared/styles/theme";
 

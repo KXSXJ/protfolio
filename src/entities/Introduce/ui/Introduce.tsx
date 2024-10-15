@@ -93,6 +93,7 @@ export const Introduce :React.FC = ()=>{
                     ...config2.scrollTrigger,
                     start: 'center 20%',
                     end : 'center 0%',
+
                 },
                 y:0,
                 duration:2,
@@ -106,7 +107,8 @@ export const Introduce :React.FC = ()=>{
                     toggleActions: "play none none none",
                     scrub: true,
                 },
-                y:'-4rem'
+                y:'-4rem',
+                opacity:0
             }
         )
         gsap.to(contentRef.current,
@@ -124,7 +126,7 @@ export const Introduce :React.FC = ()=>{
             {scrollTrigger:{
                     trigger:sectionRef.current as HTMLTableSectionElement,
                     start : 'bottom 70%',
-                    end : 'bottom 40%',
+                    end : 'bottom 45%',
                     toggleActions: "play none none none",
                     scrub: true,
                 },
@@ -140,6 +142,7 @@ export const Introduce :React.FC = ()=>{
                 <Gide_Text ref={gideTextRef}>
                     ↓ 스크롤하여 진행해주세요!
                 </Gide_Text>
+
                 <Introduce_TextWrapper ref={contentRef}>
                     <h1 ref={textRef}>안녕하세요!</h1>
                     <p ref={subTextRef}>FE개발자 강승재입니다.</p>
@@ -152,10 +155,7 @@ export const Introduce :React.FC = ()=>{
                         더 알아보기 ↓
                     </div>
                 </Introduce_TextWrapper>
-
-
             </section>
-
 
         </Introduce_container>
     )
@@ -164,13 +164,13 @@ export const Introduce :React.FC = ()=>{
 
 const Introduce_container = styled.div`
     width: 100%;
-    margin-top: 5rem;
+    padding-top: 5rem;
     height: auto;
     background-color: ${theme.color.black};
+    
     section {
         width: 100%;
         height: 350vh;
-      
     }
     position: relative;
     z-index: -1;
@@ -188,6 +188,7 @@ const Introduce_TextWrapper = styled.div`
     z-index: -1;
     h1{
         font-size: 5rem;
+        white-space: nowrap;
     }
     p{
         margin-top: 1rem;
