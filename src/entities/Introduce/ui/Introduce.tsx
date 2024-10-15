@@ -152,7 +152,10 @@ export const Introduce :React.FC = ()=>{
                         변화하는 트렌드에 맞춰 지속적으로 성장하고 싶습니다.
                     </p>
                     <div className="moreView" ref={moreViewRef}>
-                        더 알아보기 ↓
+                        <a href={"#About"}>
+                            더 알아보기 ↓
+                        </a>
+
                     </div>
                 </Introduce_TextWrapper>
             </section>
@@ -173,7 +176,7 @@ const Introduce_container = styled.div`
         height: 350vh;
     }
     position: relative;
-    z-index: -1;
+    z-index: 2;
 `
 
 const Introduce_TextWrapper = styled.div`
@@ -185,7 +188,7 @@ const Introduce_TextWrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: -5rem;
-    z-index: -1;
+    z-index: 2;
     h1{
         font-size: 5rem;
         white-space: nowrap;
@@ -196,7 +199,11 @@ const Introduce_TextWrapper = styled.div`
         text-align: center;
     }
     .moreView{
-        font-size: 1.2rem;
+        a{
+            font-size: 1.2rem;
+            
+        }
+        
         padding:1rem;
         padding-inline: 1.5rem;
         border: 1px solid ${theme.color.white}77;
