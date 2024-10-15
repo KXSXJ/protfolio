@@ -253,7 +253,10 @@ const Navigation_Container= styled.nav`
             padding-block: 0.8rem;
             margin-block: 0.1rem;
             align-items: center;
-            
+            box-sizing: border-box;
+            a{
+                width: 100vw;
+            }
             &:hover {
                 background-color: ${theme.color.gray}40;
             }

@@ -36,7 +36,7 @@ export const ProjectData :ProjectState[] =[
         cover:'calenJ.png',
         title:'캘린제이 (CalenJ)',
         dev_time :'2024.01.04 ~ 2024.09.04 (8달)',
-        dev_scale :'6인 팀 프로젝트',
+        dev_scale :'2인 팀 프로젝트',
         sub_title :'캘린더 및 실시간 채팅으로 개인 및 그룹 일정을 관리할 수 있는 사이트',
         content :['웹소켓을 활용한 실시간 채팅', '그룹간 소통을 돕는 투표 및 공지기능', 'fullCalendar를 활용한 일정관리', 'Spring Security, JWT를 활용한 사용자 인증'],
         git_link:'https://github.com/KXSXJ/Calenj',
