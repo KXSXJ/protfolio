@@ -10,6 +10,7 @@ export const AboutMe :React.FC =(props, ref)=>{
         <AboutMe_Container>
             <h1 id={"About"}>ABOUT ME</h1>
             <Grid_Box>
+
                 <Info_Box>
                     <Icon_Wrapper>
                         <i className="fi fi-rc-cake-birthday"></i>
@@ -62,7 +63,11 @@ const AboutMe_Container = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    h2{
+        font-size: 2rem;
+        margin-top: 2rem;
+        color: ${theme.color.black};
+    }
     p{
         margin-top: 1rem;
         color: ${theme.color.black}77;

@@ -1,4 +1,4 @@
-import {theme} from "../../../shared/styles/theme";
+import {media, theme} from "../../../shared/styles/theme";
 import styled from "@emotion/styled";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
@@ -174,6 +174,9 @@ const Introduce_container = styled.div`
     section {
         width: 100%;
         height: 350vh;
+        ${media.mobile}{
+            height: 320vh;
+        }
     }
     position: relative;
     z-index: 2;
