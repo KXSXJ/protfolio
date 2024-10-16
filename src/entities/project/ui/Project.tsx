@@ -60,7 +60,7 @@ export const Project :React.FC =()=>{
 
                     <article key={data.title} ref={(el)=> {
                         articleRef.current[idx] =el
-                    }}><Cover_Img $url={`./images/${data.cover}`}/>
+                    }}><Cover_Img $url={process.env.PUBLIC_URL +`/images/${data.cover}`}/>
                         <section>
                             <h5>{data.title}</h5>
                             <h6>개발기간 : {data.dev_time}</h6>
@@ -83,7 +83,7 @@ export const Project :React.FC =()=>{
                             <p>{data.use_stack}</p>
                             <div style={{marginTop:'1rem'}}>
                                 <button style={{marginRight: '0.5rem'}} onClick={()=>window.open(data.readme_url)}>
-                                    <img src={'./images/readme.png'}></img>
+                                    <img src={process.env.PUBLIC_URL + '/images/readme.png'}></img>
                                     <>README</>
                                 </button>
                                 {data.images.length>0 &&
@@ -91,7 +91,7 @@ export const Project :React.FC =()=>{
                                         setImageView(data.images)
                                         setTitle(data.title)
                                     }}>
-                                        <img src={'./images/gallery.png'}></img>
+                                        <img src={process.env.PUBLIC_URL +'/images/gallery.png'}></img>
                                         <>이미지</>
                                     </button>
                                 }

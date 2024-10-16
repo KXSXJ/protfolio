@@ -52,7 +52,7 @@ export const ImageModal :React.FC<ProjectProps> = ({title,images,onClose})=>{
                 </span>
                 <div>
                 <i className="fi fi-bs-angle-left" onClick={()=>pageHandler(0)}></i>
-                    <img src={`./images/project/${images[pageNum].url}`}></img>
+                    <img src={process.env.PUBLIC_URL +`/images/project/${images[pageNum].url}`}></img>
                     <i className="fi fi-bs-angle-right" onClick={()=>pageHandler(1)}></i>
                 </div>
                 <h5>

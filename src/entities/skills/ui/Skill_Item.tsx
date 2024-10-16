@@ -7,7 +7,7 @@ export const Skill_Item :React.FC<Skill_List> = ({_skills})=>{
             <Skill_Container>
                 {_skills.map((skill,index)=>(
                     <span key={skill.name}>
-                        <img src={`./images/${skill.url}`}></img>
+                        <img src={process.env.PUBLIC_URL +`/images/${skill.url}`}></img>
                         <p>{skill.name}</p>
                         {_skills.length>1 && !index &&
                         <p style={{paddingInline:'0.5rem'}}>

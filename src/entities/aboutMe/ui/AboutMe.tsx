@@ -4,11 +4,12 @@ import {forwardRef, useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 
-export const AboutMe :React.FC =(props, ref)=>{
+export const AboutMe :React.FC =()=>{
 
     return(
         <AboutMe_Container>
             <h1 id={"About"}>ABOUT ME</h1>
+            {window.innerWidth <= 420 && <h2>FE 개발자 강승재</h2>}
             <Grid_Box>
 
                 <Info_Box>

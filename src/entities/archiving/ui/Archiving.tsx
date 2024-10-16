@@ -13,7 +13,7 @@ export const Archiving:React.FC =()=>{
                     }} key={data.target}>
                         <h3>{data.title}</h3>
                         <span>
-                            <img src={`./images/${data.imageUrl}`}></img>
+                            <img src={process.env.PUBLIC_URL +`/images/${data.imageUrl}`}></img>
                             <h4>{data.target}</h4>
                         </span>
                         <ul>
