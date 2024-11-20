@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import {media, theme} from "../../../shared/styles/theme";
+import {theme} from "../../../shared/styles/theme";
 import {Images, ProjectData} from "./ProjectData";
-import {text} from "node:stream/consumers";
 import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ImageModal} from "./ImageModal";
+
 
 export const Project :React.FC =()=>{
     const articleRef = useRef<(HTMLElement | null)[]>([]);
@@ -12,7 +12,12 @@ export const Project :React.FC =()=>{
     const [title, setTitle] = useState<string>('')
     const animationRef = useRef<gsap.core.Timeline[]>([])
 
+
     useEffect(() => {
+        if(imageView.length>0){
+            document.body.style.overflow = 'hidden';
+        }
+
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: articleRef.current[0],
@@ -45,6 +50,9 @@ export const Project :React.FC =()=>{
                 timeline.kill())
             }
         });
+        return ()=>{
+            document.body.style.overflow = 'auto';
+        }
     }, [imageView]);
 
     return(
@@ -110,6 +118,8 @@ const Project_Container = styled.section`
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
+    position: relative;
+    z-index: 3;
     color: ${theme.color.black};
     div {
         article {

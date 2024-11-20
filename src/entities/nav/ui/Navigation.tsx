@@ -6,6 +6,7 @@ export const Navigation :React.FC=()=>{
     const [screenMode, setScreenMode] = useState<string>("pc");
     const [showNavList, setShowNavList] = useState<boolean>(false)
     const navRef = useRef<HTMLElement>(null)
+    const a = new Map()
 
     useEffect(() => {
         const handleResize = ()=>{

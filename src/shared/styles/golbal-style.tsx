@@ -18,8 +18,10 @@ export const GlobalStyle = createGlobalStyle`
     html{
         font-family: "Roboto", sans-serif;
         color: ${({ theme }) => theme.color.white};
-        scroll-behavior: smooth;
-        
+        //scroll-behavior: smooth;
+        ::-webkit-scrollbar{
+            display:none;
+        }
         ${media.laptop} {
             font-size: 14px; 
         }
@@ -31,13 +33,8 @@ export const GlobalStyle = createGlobalStyle`
         ${media.mobile} {
             font-size: 8px;
             overflow: scroll;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE 10+ */
-
-
-            body::-webkit-scrollbar {
-                display: none; /* Chrome, Safari, Edge, Opera */
-            }
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
     }
     .flex{
