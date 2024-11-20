@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import {theme} from "../../../shared/styles/theme";
 import {useEffect, useRef, useState} from "react";
 import {Images} from "./ProjectData";
-import {useScrollLock} from "../model/useScrollLock";
 
 interface ProjectProps{
     title:string,
@@ -11,15 +10,7 @@ interface ProjectProps{
 }
 export const ImageModal :React.FC<ProjectProps> = ({title,images,onClose})=>{
     const modalBackground = useRef<HTMLTableSectionElement|null>(null);
-    const {preventScroll, allowScroll} = useScrollLock()
     const [pageNum, setPageNum] = useState<number>(0)
-    useEffect(() => {
-        // 스크롤 및 마우스 조작 방지 핸들러
-        const prevScrollY = preventScroll();
-        return () => {
-            allowScroll(prevScrollY);
-        };
-    }, []);
 
     const pageHandler =(direct:number)=>{
         if(direct){
@@ -52,7 +43,7 @@ export const ImageModal :React.FC<ProjectProps> = ({title,images,onClose})=>{
                 </span>
                 <div>
                 <i className="fi fi-bs-angle-left" onClick={()=>pageHandler(0)}></i>
-                    <img src={process.env.PUBLIC_URL +`/images/project/${images[pageNum].url}`}></img>
+                    <img src={process.env.PUBLIC_URL +`/images/project/${images[pageNum].url}`} alt={'projectImg'}></img>
                     <i className="fi fi-bs-angle-right" onClick={()=>pageHandler(1)}></i>
                 </div>
                 <h5>

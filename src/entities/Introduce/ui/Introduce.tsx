@@ -119,7 +119,8 @@ export const Introduce :React.FC = ()=>{
                     toggleActions: "play none none none",
                     scrub: true,
                 },
-                y:`-65vh`
+                y:`-65vh`,
+                zIndex:0
             }
         )
         gsap.to(gideTextRef.current,
@@ -132,8 +133,6 @@ export const Introduce :React.FC = ()=>{
                 },
                 opacity:0
             })
-
-
 
     }, []);
     return(

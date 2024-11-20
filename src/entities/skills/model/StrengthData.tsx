@@ -33,7 +33,7 @@ export const StrengthData :SkillState[] = [
                 _skills:[{name:'Redux', url :'redux.png'},{name:'Redux-Saga', url :'saga.png'}]
             },
             {
-                _skills:[{name:'BootStrap', url :'bootStrap.png'}]
+                _skills:[{name:'BootStrap', url :'bootstrap.png'}]
             },
             {
                 _skills:[{name:'Spring', url :'spring.png'}]
@@ -67,7 +67,7 @@ export const StrengthData :SkillState[] = [
                 _skills: [{name:'Emotion', url:'emotion.png'}]
             },
             {
-                _skills: [{name:'Figma', url:'Figma.png'}]
+                _skills: [{name:'Figma', url:'figma.png'}]
             }
         ]
     }
